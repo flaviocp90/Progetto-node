@@ -4,19 +4,18 @@ const cors = require('cors')
 const app = express()
 
 var corOptions = {
-    origin: 'https://localhost:8081'
+    origin: 'http://localgost:8081'
 }
 
-//middleware
 
+//middleware
 app.use(cors(corOptions))
 
 app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
-//testing api
-
+//testing app
 app.get('/', (req, res) => {
     res.json({ message: 'hello from api' })
 })
@@ -25,7 +24,7 @@ app.get('/', (req, res) => {
 
 const PORT = process.env.PORT || 8080
 
-//server 
+//server
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)

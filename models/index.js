@@ -1,26 +1,25 @@
-const dbConfing = require('../config/dbConfig');
+const dbConfig = require('../config/dbConfig.js');
 
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize')
 
-const sequalize = new Sequelize(
-    dbConfing.DB,
-    dbConfing.USER,
-    dbConfing.PASSWORD, {
-        host: dbConfing.HOST,
-        dialect: dbConfing.dialect,
+const sequelize = new Sequelize(
+    dbConfig.DB,
+    dbConfig.USER,
+    dbConfig.PASSWORD,{
+        host: dbConfig.HOST,
+        dialect: dbConfig.dialect,
         operatorsAliases: false,
 
         pool: {
-            max: dbConfing.pool.max,
-            min: dbConfing.pool.min,
-            acquire: dbConfing.pool.acquaire,
-            idle: dbConfing.pool.idle
-
+            max: dbConfig.pool.max,
+            min: dbConfig.pool.min,
+            acquire: dbConfig.pool.acquire,
+            idle: dbConfig.pool.idle
         }
     }
 )
 
-sequalize.authenticate()
+sequelize.authenticate()
 .then(() => {
     console.log('connected')
 })
@@ -29,3 +28,14 @@ sequalize.authenticate()
 })
 
 const db = {}
+
+db.Sequelize = Sequelize
+db.sequelize = sequelize
+
+db.products = require('./productModel')(sequelize, DataTypes)
+db.reviews = require('./reviewModel')(sequelize, DataTypes)
+
+db.sequelize.sync({ force: false })
+.then(() => {
+    console.log('re-sync done!')
+})
