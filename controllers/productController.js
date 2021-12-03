@@ -46,6 +46,7 @@ const updateProduct = async (req, res) => {
 // delete product
 
 const deleteProduct = async (req, res) => {
+    let id = req.params.id
     await Product.destroy({ where: { id: id }})
     res.status(200).send('Product is deleted')
 }
