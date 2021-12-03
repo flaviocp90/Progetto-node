@@ -15,6 +15,12 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }))
 
+// routers
+
+const router = require('./routes/productRouter')
+app.use('/api/products', router)
+
+
 //testing app
 app.get('/', (req, res) => {
     res.json({ message: 'hello from api' })

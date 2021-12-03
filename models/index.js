@@ -39,3 +39,5 @@ db.sequelize.sync({ force: false })
 .then(() => {
     console.log('re-sync done!')
 })
+
+module.exports = db
