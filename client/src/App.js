@@ -11,8 +11,8 @@ function App() {
       <Routes>
         <Route exact={true} path='/addProduct' element={<AddProduct />} />
         <Route exact={true} path='/products' element={<ShowProducts />} />
-        <Route exact={true} path='/products/edit/:id' element={<EditProduct />} />
-        <Route exact={true} path='/products/:id' element={<ProductDetail />} />
+        <Route exact={true} path='/product/edit/:id' element={<EditProduct />} />
+        <Route exact={true} path='/product/:id' element={<ProductDetail />} />
       </Routes>
     </Router>
 
