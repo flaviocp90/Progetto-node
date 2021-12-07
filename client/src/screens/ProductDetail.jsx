@@ -1,56 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
-import { axios } from "axios";
-import { useParams } from 'react-router'
+import React, { useEffect, useState } from "react";
+import { Card, Button, Container } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
+const ProductDetail = () => {
+  const { id } = useParams();
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState(0);
+  const [description, setDescription] = useState("");
 
-const ProductDetail = ({ product }) => {
+  useEffect(() => {
+    const getSingleProduct = async () => {
+      const data = await axios.get(`/api/products/${id}`);
+      console.log(data);
 
-    const { id } = useParams()
+      setTitle(data.data.title);
+      setPrice(data.data.price);
+      setDescription(data.data.description);
+    };
+    getSingleProduct();
+  }, [id]);
 
-    const [title, setTitle] = useState("");
-    const [price, setPrice] = useState(0);
-    const [description, setDescription] = useState("");
-  
-    
-    useEffect(() => {
-
-        const getSingleProductData = async () => {
-            const { data } = await axios.get(`/api/products/allProducts${id}`);
-            console.log(data);
-            setTitle(data.title)
-            setPrice(data.price)
-            setDescription(data.description)
-
-          };
-
-          getSingleProductData();
-
-          }, [])
-
-    return (
-        <div>
-            <h1>Detail product</h1>
-            <Card
+  return (
+    <div>
+      <Container className="mt-10 p-4">
+      <h1>Detail product</h1>
+      <Card
         style={{ width: "18rem", margin: "5px" }}
-        className="shadow-lg m-2 p-3 "
+        className="shadow-lg m-5 p-2 "
       >
         <Card.Body>
-          <Card.Title>Title: {product.title}</Card.Title>
-          <Card.Title>Price: $ {product.price}</Card.Title>
-          <Card.Text>Description: {product.description}</Card.Text>
+          <Card.Title>Title: {title}</Card.Title>
+          <Card.Title>Price: $ {price}</Card.Title>
+          <Card.Text>Description: {description}</Card.Text>
         </Card.Body>
-        <Link to={`/product/edit/${product.id}`}>
-          <Button>Edit</Button>
+        <Link to={`/product/edit/${id}`}>
+          <Button style={{ margin: "5px" }}>Edit</Button>
         </Link>
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${id}`}>
           <Button>Delete</Button>
         </Link>
       </Card>
+      </Container>
+    </div>
+  );
+};
 
-        </div>
-    )
-}
-
-export default ProductDetail
+export default ProductDetail;
