@@ -12,11 +12,11 @@ router.get('/allProducts', productController.getAllProducts)
 router.get('/published', productController.getPublishedProduct)
 
 // review url and controller
-router.post('/addReview', reviewController.addReview)
+router.post('/addReview/:id', reviewController.addReview)
 router.get('/allReviews', reviewController.getAllReviews)
 
 // get product Reviews
-router.get('/getProductReviews', productController.getProductReviews)
+router.get('/getProductReviews/:id', productController.getProductReviews)
 
 router.get('/:id', productController.getOneProduct)
 router.put('/:id', productController.updateProduct)
