@@ -2,6 +2,7 @@ import axios from "axios";
 import React, {useState, useEffect} from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 function EditProduct() {
@@ -24,8 +25,22 @@ function EditProduct() {
 
     },[id])
 
-    const updateHandler = () => {
-        console.log('update')
+    const navigate = useNavigate()
+
+
+    const updateHandler = async (e) => {
+      e.preventDefault()
+
+      const data = {
+        title: title,
+        price: price,
+        description: description,
+        published: true
+      }
+
+      await axios.put(`/api/products/${id}`, data)
+      navigate('/products')
+
     }
   
   return (

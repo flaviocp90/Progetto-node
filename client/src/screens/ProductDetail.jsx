@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Card, Button, Container } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -21,6 +23,15 @@ const ProductDetail = () => {
     getSingleProduct();
   }, [id]);
 
+  const navigate = useNavigate()
+
+  const handleDelete = async (id) => {
+
+    await axios.delete(`/api/products/${id}`)
+    navigate('/products')
+
+  }
+
   return (
     <div>
       <Container className="mt-10 p-4">
@@ -37,9 +48,7 @@ const ProductDetail = () => {
         <Link to={`/product/edit/${id}`}>
           <Button style={{ margin: "5px" }}>Edit</Button>
         </Link>
-        <Link to={`/product/${id}`}>
-          <Button>Delete</Button>
-        </Link>
+          <Button onClick={() => handleDelete(id)}>Delete</Button>
       </Card>
       </Container>
     </div>
