@@ -17,14 +17,14 @@ export const ShowProducts = () => {
 
   return (
     <div>
-      <Container className="justify-content-center mt-2 mb-2 p-2">
+      <Container className="justify-content-center p-2">
         <h1 className="text-center">Show all products</h1>
         <hr />
 
         <Row>
           {products.map((product) => {
             return (
-            <Col md={8} lg={12} sm={12} key={product.id}>
+            <Col md={6} lg={4} sm={12} key={product.id}>
                 <ProductCard product={product} />
             </Col>)
           })}
