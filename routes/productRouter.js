@@ -7,7 +7,7 @@ const router = require('express').Router()
 
 
 // use routers
-router.post('/addProduct', productController.addProduct)
+router.post('/addProduct', productController.upload , productController.addProduct)
 router.get('/allProducts', productController.getAllProducts)
 router.get('/published', productController.getPublishedProduct)
 
