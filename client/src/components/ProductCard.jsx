@@ -9,6 +9,7 @@ const ProductCard = ({ product }) => {
         style={{ width: "18rem", margin: "5px" }}
         className="shadow-lg m-2 p-3 "
       >
+        <Card.Img src={product.image}/>
         <Card.Body>
           <Card.Title>Title: {product.title}</Card.Title>
           <Card.Title>Price: $ {product.price}</Card.Title>

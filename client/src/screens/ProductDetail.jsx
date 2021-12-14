@@ -9,8 +9,10 @@ const ProductDetail = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [productDescription, setProductDescription] = useState("");
-  const [reviews, setReviews] = useState([]);
+  const [published, setPublished] = useState(true)
+  const [productImage, setProductImage] = useState('')
 
+  const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState('')
 
@@ -22,7 +24,9 @@ const ProductDetail = () => {
       setTitle(data.data.title);
       setPrice(data.data.price);
       setProductDescription(data.data.description);
+      setPublished(data.data.description)
       setReviews(data.data.review)
+      setProductImage(data.data.image)
 
     };
     getSingleProduct();
@@ -59,6 +63,7 @@ const ProductDetail = () => {
           style={{ width: "18rem", margin: "5px" }}
           className="shadow-lg m-5 p-2 "
         >
+          <Card.Img src={`http://localhost:3000/${productImage}`}/>
           <Card.Body>
             <Card.Title>Title: {title}</Card.Title>
             <Card.Title>Price: $ {price}</Card.Title>
